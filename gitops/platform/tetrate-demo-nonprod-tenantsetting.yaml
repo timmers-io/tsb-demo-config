@@ -1,0 +1,21 @@
+apiVersion: tsb.tetrate.io/v2
+kind: TenantSetting
+metadata:
+  name: default-setting
+  annotations:
+    tsb.tetrate.io/organization: tetrate
+    tsb.tetrate.io/tenant: demo-nonprod
+spec:
+  defaultSecuritySetting:
+    authenticationSettings:
+      trafficMode: OPTIONAL
+    authorization:
+      mode: DISABLED
+    displayName: default-setting
+  defaultTrafficSetting:
+    displayName: default-setting
+    reachability:
+      mode: CLUSTER
+    resilience:
+      circuitBreakerSensitivity: LOW
+  displayName: default-setting
