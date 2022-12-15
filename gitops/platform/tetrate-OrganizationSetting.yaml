@@ -1,4 +1,4 @@
-apiVersion: api.tsb.tetrate.io/v2
+apiVersion: tsb.tetrate.io/v2
 kind: OrganizationSetting
 metadata:
   name: tetrate-settings
@@ -10,3 +10,4 @@ spec:
       tier1: aks,eks
       aks: eks
       eks: aks
+---
