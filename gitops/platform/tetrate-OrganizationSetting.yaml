@@ -2,10 +2,11 @@ apiVersion: api.tsb.tetrate.io/v2
 kind: OrganizationSetting
 metadata:
   name: tetrate-settings
-  organization: tetrate
+  annotations:
+    tsb.tetrate.io/organization: tetrate
 spec:
-  fqn: organizations/tetrate/settings/tetrate-settings
   networkSettings:
     networkReachability:
       tier1: aks,eks
       aks: eks
+      eks: aks
