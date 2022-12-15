@@ -1,7 +1,7 @@
 apiVersion: tsb.tetrate.io/v2
 kind: TenantSetting
 metadata:
-  name: default-setting
+  name: demo-nonprod-ts
   annotations:
     tsb.tetrate.io/organization: tetrate
     tsb.tetrate.io/tenant: demo-nonprod
