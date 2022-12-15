@@ -8,6 +8,5 @@ spec:
   networkSettings:
     networkReachability:
       tier1: aks,eks
-      aks: eks
-      eks: aks
----
+      # aks: eks
+      # eks: aks
