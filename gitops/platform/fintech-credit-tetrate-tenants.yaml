@@ -1,0 +1,87 @@
+---
+apiVersion: v1
+kind: List
+items:
+  - apiVersion: tsb.tetrate.io/v2
+    kind: Tenant
+    metadata:
+      name: fintech-credit-non-prod
+      annotations:
+        tsb.tetrate.io/organization: tetrate
+    spec:
+      description: Fintech Credit Non-Prod
+      displayName: Fintech Credit Non-Prod
+  - apiVersion: tsb.tetrate.io/v2
+    kind: Workspace
+    metadata:
+      name: credit-dev
+      annotations:
+        tsb.tetrate.io/organization: tetrate
+        tsb.tetrate.io/tenant: fintech-credit-non-prod
+    spec:
+      description: Credit Dev
+      displayName: Credit Dev
+      namespaceSelector:
+        names:
+          - "*/credit-dev"
+  - apiVersion: tsb.tetrate.io/v2
+    kind: Workspace
+    metadata:
+      name: credit-test
+      annotations:
+        tsb.tetrate.io/organization: tetrate
+        tsb.tetrate.io/tenant: fintech-credit-non-prod
+    spec:
+      description: Credit Test
+      displayName: Credit Test
+      namespaceSelector:
+        names:
+          - "*/credit-test"
+  - apiVersion: tsb.tetrate.io/v2
+    kind: Workspace
+    metadata:
+      name: credit-stage
+      annotations:
+        tsb.tetrate.io/organization: tetrate
+        tsb.tetrate.io/tenant: fintech-credit-non-prod
+    spec:
+      description: Credit Stage
+      displayName: Credit Stage
+      namespaceSelector:
+        names:
+          - "*/credit-stage"
+  - apiVersion: tsb.tetrate.io/v2
+    kind: Tenant
+    metadata:
+      name: fintech-credit-prod
+      annotations:
+        tsb.tetrate.io/organization: tetrate
+    spec:
+      description: Fintech Credit Prod
+      displayName: Fintech Credit Prod
+  - apiVersion: tsb.tetrate.io/v2
+    kind: Workspace
+    metadata:
+      name: credit-prod
+      annotations:
+        tsb.tetrate.io/organization: tetrate
+        tsb.tetrate.io/tenant: fintech-credit-prod
+    spec:
+      description: Credit Prod
+      displayName: Credit Prod
+      namespaceSelector:
+        names:
+          - "*/credit-prod"
+  - apiVersion: tsb.tetrate.io/v2
+    kind: Workspace
+    metadata:
+      name: credit-uat
+      annotations:
+        tsb.tetrate.io/organization: tetrate
+        tsb.tetrate.io/tenant: fintech-credit-prod
+    spec:
+      description: Credit UAT
+      displayName: Credit UAT
+      namespaceSelector:
+        names:
+          - "*/credit-uat"

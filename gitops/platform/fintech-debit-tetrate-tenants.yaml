@@ -1,0 +1,87 @@
+---
+apiVersion: v1
+kind: List
+items:
+  - apiVersion: tsb.tetrate.io/v2
+    kind: Tenant
+    metadata:
+      name: fintech-debit-non-prod
+      annotations:
+        tsb.tetrate.io/organization: tetrate
+    spec:
+      description: Fintech Debit Non-Prod
+      displayName: Fintech Debit Non-Prod
+  - apiVersion: tsb.tetrate.io/v2
+    kind: Workspace
+    metadata:
+      name: debit-dev
+      annotations:
+        tsb.tetrate.io/organization: tetrate
+        tsb.tetrate.io/tenant: fintech-debit-non-prod
+    spec:
+      description: Debit Dev
+      displayName: Debit Dev
+      namespaceSelector:
+        names:
+          - "*/debit-dev"
+  - apiVersion: tsb.tetrate.io/v2
+    kind: Workspace
+    metadata:
+      name: debit-test
+      annotations:
+        tsb.tetrate.io/organization: tetrate
+        tsb.tetrate.io/tenant: fintech-debit-non-prod
+    spec:
+      description: Debit Test
+      displayName: Debit Test
+      namespaceSelector:
+        names:
+          - "*/debit-test"
+  - apiVersion: tsb.tetrate.io/v2
+    kind: Workspace
+    metadata:
+      name: debit-stage
+      annotations:
+        tsb.tetrate.io/organization: tetrate
+        tsb.tetrate.io/tenant: fintech-debit-non-prod
+    spec:
+      description: Debit Stage
+      displayName: Debit Stage
+      namespaceSelector:
+        names:
+          - "*/debit-stage"
+  - apiVersion: tsb.tetrate.io/v2
+    kind: Tenant
+    metadata:
+      name: fintech-debit-prod
+      annotations:
+        tsb.tetrate.io/organization: tetrate
+    spec:
+      description: Fintech Debit Prod
+      displayName: Fintech Debit Prod
+  - apiVersion: tsb.tetrate.io/v2
+    kind: Workspace
+    metadata:
+      name: debit-prod
+      annotations:
+        tsb.tetrate.io/organization: tetrate
+        tsb.tetrate.io/tenant: fintech-debit-prod
+    spec:
+      description: Debit Prod
+      displayName: Debit Prod
+      namespaceSelector:
+        names:
+          - "*/debit-prod"
+  - apiVersion: tsb.tetrate.io/v2
+    kind: Workspace
+    metadata:
+      name: debit-uat
+      annotations:
+        tsb.tetrate.io/organization: tetrate
+        tsb.tetrate.io/tenant: fintech-debit-prod
+    spec:
+      description: Debit UAT
+      displayName: Debit UAT
+      namespaceSelector:
+        names:
+          - "*/debit-uat"
