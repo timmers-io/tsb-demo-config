@@ -1,0 +1,87 @@
+---
+apiVersion: v1
+kind: List
+items:
+  - apiVersion: tsb.tetrate.io/v2
+    kind: Tenant
+    metadata:
+      name: retail-customer-non-prod
+      annotations:
+        tsb.tetrate.io/organization: tetrate
+    spec:
+      description: Retail Customer Non-Prod
+      displayName: Retail Customer Non-Prod
+  - apiVersion: tsb.tetrate.io/v2
+    kind: Workspace
+    metadata:
+      name: retail-customer-dev
+      annotations:
+        tsb.tetrate.io/organization: tetrate
+        tsb.tetrate.io/tenant: retail-customer-non-prod
+    spec:
+      description: Retail Customer Dev
+      displayName: Retail Customer Dev
+      namespaceSelector:
+        names:
+          - "*/retail-customer-dev"
+  - apiVersion: tsb.tetrate.io/v2
+    kind: Workspace
+    metadata:
+      name: retail-customer-test
+      annotations:
+        tsb.tetrate.io/organization: tetrate
+        tsb.tetrate.io/tenant: retail-customer-non-prod
+    spec:
+      description: Retail Customer Test
+      displayName: Retail Customer Test
+      namespaceSelector:
+        names:
+          - "*/retail-customer-test"
+  - apiVersion: tsb.tetrate.io/v2
+    kind: Workspace
+    metadata:
+      name: retail-customer-stage
+      annotations:
+        tsb.tetrate.io/organization: tetrate
+        tsb.tetrate.io/tenant: retail-customer-non-prod
+    spec:
+      description: Retail Customer Stage
+      displayName: Retail Customer Stage
+      namespaceSelector:
+        names:
+          - "*/retail-customer-stage"
+  - apiVersion: tsb.tetrate.io/v2
+    kind: Tenant
+    metadata:
+      name: retail-customer-prod
+      annotations:
+        tsb.tetrate.io/organization: tetrate
+    spec:
+      description: Retail Customer Prod
+      displayName: Retail Customer Prod
+  - apiVersion: tsb.tetrate.io/v2
+    kind: Workspace
+    metadata:
+      name: retail-customer-prod
+      annotations:
+        tsb.tetrate.io/organization: tetrate
+        tsb.tetrate.io/tenant: retail-customer-prod
+    spec:
+      description: Retail Customer Prod
+      displayName: Retail Customer Prod
+      namespaceSelector:
+        names:
+          - "*/retail-customer-prod"
+  - apiVersion: tsb.tetrate.io/v2
+    kind: Workspace
+    metadata:
+      name: retail-customer-uat
+      annotations:
+        tsb.tetrate.io/organization: tetrate
+        tsb.tetrate.io/tenant: retail-customer-prod
+    spec:
+      description: Retail Customer UAT
+      displayName: Retail Customer UAT
+      namespaceSelector:
+        names:
+          - "*/retail-customer-uat"
