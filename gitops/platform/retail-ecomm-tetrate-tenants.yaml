@@ -24,6 +24,10 @@ items:
       namespaceSelector:
         names:
           - "*/retail-dev"
+          - "*/retail-eshop-dev"
+          - "*/retail-checkout-dev"
+          - "*/retail-payments-dev"
+          - "*/retail-trafficgen-dev"
   - apiVersion: tsb.tetrate.io/v2
     kind: Workspace
     metadata:
