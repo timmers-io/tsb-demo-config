@@ -1,0 +1,63 @@
+apiVersion: api.tsb.tetrate.io/v2
+kind: Workspace
+metadata:
+  organization: tetrate
+  tenant: retail-ecomm-non-prod
+  name: retail-payments-${SDLC_ENV}-ws
+spec:
+  displayName: Payments Gateway
+  namespaceSelector:
+    names:
+    - '*/retail-payments-${SDLC_ENV}'
+---
+apiVersion: gateway.tsb.tetrate.io/v2
+kind: Group
+metadata:
+  organization: tetrate
+  tenant: retail-ecomm-non-prod
+  workspace: retail-payments-${SDLC_ENV}-ws
+  name: payments-gateways
+spec:
+  displayName: Payments Gateways
+  namespaceSelector:
+    names:
+    - '*/retail-payments-${SDLC_ENV}'
+---
+apiVersion: api.tsb.tetrate.io/v2
+kind: Workspace
+metadata:
+  organization: tetrate
+  tenant: retail-ecomm-non-prod
+  name: retail-eshop-${SDLC_ENV}-ws
+spec:
+  displayName: eShop Portal
+  namespaceSelector:
+    names:
+    - '*/retail-eshop-${SDLC_ENV}'
+    - '*/retail-checkout-${SDLC_ENV}'
+---
+apiVersion: gateway.tsb.tetrate.io/v2
+kind: Group
+metadata:
+  organization: tetrate
+  tenant: retail-ecomm-non-prod
+  workspace: retail-eshop-${SDLC_ENV}-ws
+  name: eshop-gateways
+spec:
+  displayName: eShop Gateway Group
+  namespaceSelector:
+    names:
+    - '*/retail-eshop-${SDLC_ENV}'
+---
+apiVersion: traffic.tsb.tetrate.io/v2
+kind: Group
+metadata:
+  organization: tetrate
+  tenant: retail-ecomm-non-prod
+  workspace: retail-eshop-${SDLC_ENV}-ws
+  name: eshop-traffic
+spec:
+  displayName: eShop Traffic Group
+  namespaceSelector:
+    names:
+    - '*/retail-eshop-${SDLC_ENV}'

@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: trafficgenerator
+  namespace: retail-trafficgen-${SDLC_ENV}
+  labels:
+    app: trafficgenerator
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: trafficgenerator
+  template:
+    metadata:
+      labels:
+        app: trafficgenerator
+    spec:
+      containers:
+        - name: trafficgenerator
+          image: appropriate/curl
+          args:
+            - /bin/sh
+            - -c
+            - |
+              curl http://${ESHOP_HOST}/proxy/orders/proxy/checkout.retail-checkout-${SDLC_ENV}/proxy/${PAYMENTS_HOST}/latency/200
+              curl http://${ESHOP_HOST}/proxy/orders/proxy/checkout.retail-checkout-${SDLC_ENV}/errors/20
+              while :; do
+                curl -H "X-B3-Sampled: 1" http://${ESHOP_HOST}/proxy/orders/proxy/checkout.retail-checkout-${SDLC_ENV}/proxy/${PAYMENTS_HOST}/proxy/accounting
+                sleep 30
+              done

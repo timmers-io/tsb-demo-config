@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: retail-eshop-${SDLC_ENV}
+  labels:
+    istio-injection: enabled
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: retail-checkout-${SDLC_ENV}
+  labels:
+    istio-injection: enabled
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: retail-payments-${SDLC_ENV}
+  labels:
+    istio-injection: enabled
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: retail-trafficgen-${SDLC_ENV}
+  labels:
+    istio-injection: enabled

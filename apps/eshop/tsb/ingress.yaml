@@ -1,0 +1,47 @@
+apiVersion: gateway.tsb.tetrate.io/v2
+kind: IngressGateway
+metadata:
+  organization: tetrate
+  tenant: retail-ecomm-non-prod
+  workspace: retail-payments-${SDLC_ENV}-ws
+  group: payments-gateways
+  name: payments-gateway
+spec:
+  displayName: Payments Gateway
+  http:
+  - hostname: ${PAYMENTS_HOST}
+    name: payments
+    port: 80
+    routing:
+      rules:
+      - route:
+          host: retail-payments-${SDLC_ENV}/payments.retail-payments-${SDLC_ENV}.svc.cluster.local
+          port: 80
+  workloadSelector:
+    labels:
+      app: tsb-gateway-payments
+    namespace: retail-payments-${SDLC_ENV}
+---
+apiVersion: gateway.tsb.tetrate.io/v2
+kind: IngressGateway
+metadata:
+  organization: tetrate
+  tenant: retail-ecomm-non-prod
+  workspace: retail-eshop-${SDLC_ENV}-ws
+  group: eshop-gateways
+  name: eshop-gateway
+spec:
+  displayName: eShop Gateway
+  http:
+  - hostname: ${ESHOP_HOST}
+    name: eshop
+    port: 80
+    routing:
+      rules:
+      - route:
+          host: retail-eshop-${SDLC_ENV}/products.retail-eshop-${SDLC_ENV}.svc.cluster.local
+          port: 80
+  workloadSelector:
+    labels:
+      app: tsb-gateway-eshop
+    namespace: retail-eshop-${SDLC_ENV}

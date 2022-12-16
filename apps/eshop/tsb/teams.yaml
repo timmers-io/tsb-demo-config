@@ -1,0 +1,28 @@
+apiVersion: api.tsb.tetrate.io/v2
+kind: Team
+metadata:
+  name: everyone
+  organization: tetrate
+spec:
+  members:
+  - organizations/tetrate/users/${TENANT_OWNER}
+  - organizations/tetrate/users/${ESHOP_OWNER}
+  - organizations/tetrate/users/${PAYMENTS_OWNER}
+---
+apiVersion: api.tsb.tetrate.io/v2
+kind: Team
+metadata:
+  name: eshop-team
+  organization: tetrate
+spec:
+  members:
+  - organizations/tetrate/users/${ESHOP_OWNER}
+---
+apiVersion: api.tsb.tetrate.io/v2
+kind: Team
+metadata:
+  name: payments-team
+  organization: tetrate
+spec:
+  members:
+  - organizations/tetrate/users/${PAYMENTS_OWNER}
