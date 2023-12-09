@@ -1,0 +1,87 @@
+---
+apiVersion: v1
+kind: List
+items:
+  - apiVersion: tsb.tetrate.io/v2
+    kind: Tenant
+    metadata:
+      name: bookinfo-non-prod
+      annotations:
+        tsb.tetrate.io/organization: tetrate
+    spec:
+      description: Bookinfo Non-Prod
+      displayName: Bookinfo Non-Prod
+  - apiVersion: tsb.tetrate.io/v2
+    kind: Workspace
+    metadata:
+      name: bookinfo-dev
+      annotations:
+        tsb.tetrate.io/organization: tetrate
+        tsb.tetrate.io/tenant: bookinfo-non-prod
+    spec:
+      description: Bookinfo Dev
+      displayName: Bookinfo Dev
+      namespaceSelector:
+        names:
+          - "*/bookinfo-dev"
+  - apiVersion: tsb.tetrate.io/v2
+    kind: Workspace
+    metadata:
+      name: bookinfo-test
+      annotations:
+        tsb.tetrate.io/organization: tetrate
+        tsb.tetrate.io/tenant: bookinfo-non-prod
+    spec:
+      description: Bookinfo Test
+      displayName: Bookinfo Test
+      namespaceSelector:
+        names:
+          - "*/bookinfo-test"
+  - apiVersion: tsb.tetrate.io/v2
+    kind: Workspace
+    metadata:
+      name: bookinfo-stage
+      annotations:
+        tsb.tetrate.io/organization: tetrate
+        tsb.tetrate.io/tenant: bookinfo-non-prod
+    spec:
+      description: Bookinfo Stage
+      displayName: Bookinfo Stage
+      namespaceSelector:
+        names:
+          - "*/bookinfo-stage"
+  - apiVersion: tsb.tetrate.io/v2
+    kind: Tenant
+    metadata:
+      name: bookinfo-prod
+      annotations:
+        tsb.tetrate.io/organization: tetrate
+    spec:
+      description: Bookinfo Prod
+      displayName: Bookinfo Prod
+  - apiVersion: tsb.tetrate.io/v2
+    kind: Workspace
+    metadata:
+      name: bookinfo-prod
+      annotations:
+        tsb.tetrate.io/organization: tetrate
+        tsb.tetrate.io/tenant: bookinfo-prod
+    spec:
+      description: Bookinfo Prod
+      displayName: Bookinfo Prod
+      namespaceSelector:
+        names:
+          - "*/bookinfo-prod"
+  - apiVersion: tsb.tetrate.io/v2
+    kind: Workspace
+    metadata:
+      name: bookinfo-uat
+      annotations:
+        tsb.tetrate.io/organization: tetrate
+        tsb.tetrate.io/tenant: bookinfo-prod
+    spec:
+      description: Bookinfo UAT
+      displayName: Bookinfo UAT
+      namespaceSelector:
+        names:
+          - "*/bookinfo-uat"
