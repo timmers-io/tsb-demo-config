@@ -22,6 +22,21 @@ items:
       namespaceSelector:
         names:
           - "az-services-cp19/global-dev-cart"
+  - apiVersion: api.tsb.tetrate.io/v2
+    kind: WorkspaceSetting
+    metadata:
+      displayName: default-setting
+      name: default-setting
+      annotations:
+        tsb.tetrate.io/organization: tetrate
+        tsb.tetrate.io/tenant: global-dev
+        tsb.tetrate.io/workspace: global-dev-cart-ws
+    spec:
+      defaultSecuritySetting:
+        displayName: default-setting
+      defaultTrafficSetting:
+        displayName: default-setting
+      displayName: default-setting
   - apiVersion: tsb.tetrate.io/v2
     kind: Workspace
     metadata:
