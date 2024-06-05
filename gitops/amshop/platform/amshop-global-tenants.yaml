@@ -12,6 +12,28 @@ items:
       description: Global Products Dev
       displayName: Global Products Dev
   - apiVersion: tsb.tetrate.io/v2
+    kind: Workspace
+    metadata:
+      name: global-dev-cart-ws
+      annotations:
+        tsb.tetrate.io/organization: tetrate
+        tsb.tetrate.io/tenant: global-dev
+    spec:
+      namespaceSelector:
+        names:
+          - "az-services-cp19/global-dev-cart"
+  - apiVersion: tsb.tetrate.io/v2
+    kind: Workspace
+    metadata:
+      name: global-dev-payment-ws
+      annotations:
+        tsb.tetrate.io/organization: tetrate
+        tsb.tetrate.io/tenant: global-dev
+    spec:
+      namespaceSelector:
+        names:
+          - "az-services-cp19/global-dev-payment"
+  - apiVersion: tsb.tetrate.io/v2
     kind: Tenant
     metadata:
       name: global-test
