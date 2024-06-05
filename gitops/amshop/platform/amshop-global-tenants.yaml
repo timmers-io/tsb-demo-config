@@ -1,0 +1,31 @@
+---
+apiVersion: v1
+kind: List
+items:
+  - apiVersion: tsb.tetrate.io/v2
+    kind: Tenant
+    metadata:
+      name: global-dev
+      annotations:
+        tsb.tetrate.io/organization: tetrate
+    spec:
+      description: Global Products Dev
+      displayName: Global Products Dev
+  - apiVersion: tsb.tetrate.io/v2
+    kind: Tenant
+    metadata:
+      name: global-test
+      annotations:
+        tsb.tetrate.io/organization: tetrate
+    spec:
+      description: Global Products Test
+      displayName: Global Products Test
+  - apiVersion: tsb.tetrate.io/v2
+    kind: Tenant
+    metadata:
+      name: global-prod
+      annotations:
+        tsb.tetrate.io/organization: tetrate
+    spec:
+      description: Global Products Prod
+      displayName: Global Products Prod
