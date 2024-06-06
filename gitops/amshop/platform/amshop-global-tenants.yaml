@@ -56,3 +56,13 @@ items:
     spec:
       description: Global Products Prod
       displayName: Global Products Prod
+  - apiVersion: tsb.tetrate.io/v2
+    kind: Tenant
+    metadata:
+      name: global-perf
+      namespace: tsb-gitops
+      annotations:
+        tsb.tetrate.io/organization: tetrate
+    spec:
+      description: Global Products Perf
+      displayName: Global Products Perf
