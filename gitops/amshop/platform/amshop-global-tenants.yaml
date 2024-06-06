@@ -6,6 +6,7 @@ items:
     kind: Tenant
     metadata:
       name: global-dev
+      namespace: tsb-gitops
       annotations:
         tsb.tetrate.io/organization: tetrate
     spec:
@@ -15,6 +16,7 @@ items:
     kind: Workspace
     metadata:
       name: global-dev-cart-ws
+      namespace: tsb-gitops
       annotations:
         tsb.tetrate.io/organization: tetrate
         tsb.tetrate.io/tenant: global-dev
@@ -26,6 +28,7 @@ items:
     kind: Workspace
     metadata:
       name: global-dev-payment-ws
+      namespace: tsb-gitops
       annotations:
         tsb.tetrate.io/organization: tetrate
         tsb.tetrate.io/tenant: global-dev
@@ -37,6 +40,7 @@ items:
     kind: Tenant
     metadata:
       name: global-test
+      namespace: tsb-gitops
       annotations:
         tsb.tetrate.io/organization: tetrate
     spec:
@@ -46,6 +50,7 @@ items:
     kind: Tenant
     metadata:
       name: global-prod
+      namespace: tsb-gitops
       annotations:
         tsb.tetrate.io/organization: tetrate
     spec:
