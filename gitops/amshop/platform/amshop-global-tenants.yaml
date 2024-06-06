@@ -41,18 +41,6 @@ items:
   - apiVersion: tsb.tetrate.io/v2
     kind: Workspace
     metadata:
-      name: payment-global-dev-ws
-      namespace: tsb-gitops
-      annotations:
-        tsb.tetrate.io/organization: tetrate
-        tsb.tetrate.io/tenant: global-dev
-    spec:
-      namespaceSelector:
-        names:
-          - "ngcom-preprod01-tier2-blue/payment-global-dev"
-  - apiVersion: tsb.tetrate.io/v2
-    kind: Workspace
-    metadata:
       name: cart-global-dev-ws
       namespace: tsb-gitops
       annotations:
