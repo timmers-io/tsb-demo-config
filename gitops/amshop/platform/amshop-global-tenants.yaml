@@ -15,7 +15,7 @@ items:
   - apiVersion: tsb.tetrate.io/v2
     kind: Workspace
     metadata:
-      name: global-dev-cart-ws
+      name: payment-global-dev-ws
       namespace: tsb-gitops
       annotations:
         tsb.tetrate.io/organization: tetrate
@@ -23,11 +23,11 @@ items:
     spec:
       namespaceSelector:
         names:
-          - "az-services-cp19/global-dev-cart"
+          - "ngcom-preprod01-tier2-blue/payment-global-dev"
   - apiVersion: tsb.tetrate.io/v2
     kind: Workspace
     metadata:
-      name: global-dev-payment-ws
+      name: cart-global-dev-ws
       namespace: tsb-gitops
       annotations:
         tsb.tetrate.io/organization: tetrate
@@ -35,17 +35,17 @@ items:
     spec:
       namespaceSelector:
         names:
-          - "az-services-cp19/global-dev-payment"
+          - "ngcom-preprod01-tier2-blue/cart-global-dev"
   - apiVersion: tsb.tetrate.io/v2
     kind: Tenant
     metadata:
-      name: global-test
+      name: global-qa
       namespace: tsb-gitops
       annotations:
         tsb.tetrate.io/organization: tetrate
     spec:
-      description: Global Products Test
-      displayName: Global Products Test
+      description: Global Products QA
+      displayName: Global Products QA
   - apiVersion: tsb.tetrate.io/v2
     kind: Tenant
     metadata:
