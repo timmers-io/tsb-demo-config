@@ -79,7 +79,6 @@ items:
       namespaceSelector:
         names:
           - "ngcom-preprod01-tier2-blue/payment-global-dev"
-      configMode: BRIDGED
   - apiVersion: tsb.tetrate.io/v2
     kind: Workspace
     metadata:
