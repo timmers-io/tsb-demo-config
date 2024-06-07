@@ -38,6 +38,48 @@ items:
         names:
           - "ngcom-preprod01-tier2-blue/payment-global-dev"
       configMode: BRIDGED
+  - apiVersion: traffic.tsb.tetrate.io/v2
+    kind: Group
+    metadata:
+      name: payment-global-dev-tg
+      namespace: tsb-gitops
+      annotations:
+        tsb.tetrate.io/organization: tetrate
+        tsb.tetrate.io/tenant: global-dev
+        tsb.tetrate.io/workspace: payment-global-dev-ws
+    spec:
+      namespaceSelector:
+        names:
+          - "ngcom-preprod01-tier2-blue/payment-global-dev"
+      configMode: BRIDGED
+  - apiVersion: security.tsb.tetrate.io/v2
+    kind: Group
+    metadata:
+      name: payment-global-dev-sg
+      namespace: tsb-gitops
+      annotations:
+        tsb.tetrate.io/organization: tetrate
+        tsb.tetrate.io/tenant: global-dev
+        tsb.tetrate.io/workspace: payment-global-dev-ws
+    spec:
+      namespaceSelector:
+        names:
+          - "ngcom-preprod01-tier2-blue/payment-global-dev"
+      configMode: BRIDGED
+  - apiVersion: istiointernal.tsb.tetrate.io/v2
+    kind: Group
+    metadata:
+      name: payment-global-dev-ig
+      namespace: tsb-gitops
+      annotations:
+        tsb.tetrate.io/organization: tetrate
+        tsb.tetrate.io/tenant: global-dev
+        tsb.tetrate.io/workspace: payment-global-dev-ws
+    spec:
+      namespaceSelector:
+        names:
+          - "ngcom-preprod01-tier2-blue/payment-global-dev"
+      configMode: BRIDGED
   - apiVersion: tsb.tetrate.io/v2
     kind: Workspace
     metadata:
