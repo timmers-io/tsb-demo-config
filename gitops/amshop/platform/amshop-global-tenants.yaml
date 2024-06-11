@@ -106,7 +106,7 @@ items:
   - apiVersion: tsb.tetrate.io/v2
     kind: Workspace
     metadata:
-      name: product-amshop-dev-ws
+      name: amshop-global-dev-ws
       namespace: tsb-gitops
       annotations:
         tsb.tetrate.io/organization: tetrate
