@@ -94,7 +94,7 @@ items:
   - apiVersion: tsb.tetrate.io/v2
     kind: Workspace
     metadata:
-      name: checkout-global-dev-ws
+      name: product-global-dev-ws
       namespace: tsb-gitops
       annotations:
         tsb.tetrate.io/organization: tetrate
@@ -102,7 +102,7 @@ items:
     spec:
       namespaceSelector:
         names:
-          - "ngcom-preprod01-tier2-blue/checkout-global-dev"
+          - "ngcom-preprod01-tier2-blue/product-global-dev"
   - apiVersion: tsb.tetrate.io/v2
     kind: Tenant
     metadata:
