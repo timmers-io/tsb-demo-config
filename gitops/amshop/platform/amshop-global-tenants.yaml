@@ -116,6 +116,18 @@ items:
         names:
           - "ngcom-preprod01-tier2-blue/amshop-global-dev"
   - apiVersion: tsb.tetrate.io/v2
+    kind: Workspace
+    metadata:
+      name: app-gateways-global-dev-ws
+      namespace: tsb-gitops
+      annotations:
+        tsb.tetrate.io/organization: tetrate
+        tsb.tetrate.io/tenant: global-dev
+    spec:
+      namespaceSelector:
+        names:
+          - "ngcom-preprod01-tier2-blue/app-gateways-global-dev"
+  - apiVersion: tsb.tetrate.io/v2
     kind: Tenant
     metadata:
       name: global-qa
