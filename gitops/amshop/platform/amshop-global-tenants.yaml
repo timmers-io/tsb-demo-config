@@ -127,6 +127,20 @@ items:
       namespaceSelector:
         names:
           - "ngcom-preprod01-tier2-blue/app-gateways-global-dev"
+  - apiVersion: gateway.tsb.tetrate.io/v2
+    kind: Group
+    metadata:
+      name: app-gateways-global-dev-gg
+      namespace: tsb-gitops
+      annotations:
+        tsb.tetrate.io/organization: tetrate
+        tsb.tetrate.io/tenant: global-dev
+        tsb.tetrate.io/workspace: app-gateways-global-dev-ws
+    spec:
+      namespaceSelector:
+        names:
+          - "ngcom-preprod01-tier2-blue/payment-global-dev"
+      configMode: BRIDGED
   - apiVersion: tsb.tetrate.io/v2
     kind: Tenant
     metadata:
