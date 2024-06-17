@@ -11,7 +11,7 @@ items:
   - apiVersion: install.tetrate.io/v1alpha1
     kind: Gateway
     metadata:
-      name: app-shared-gw
+      name: app-shared-gw-tier2-green
       namespace: app-gateways-global-dev
     spec:
       type: UNIFIED
@@ -32,7 +32,7 @@ items:
       workloadSelector:
         namespace: app-gateways-global-dev
         labels:
-          app: app-shared-gw
+          app: app-shared-gw-tier2-green
       http:
         - name: product-global-dev
           port: 80
