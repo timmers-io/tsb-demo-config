@@ -118,7 +118,7 @@ items:
   - apiVersion: tsb.tetrate.io/v2
     kind: Workspace
     metadata:
-      name: app-gateways-global-dev-ws
+      name: app-gateways-global-dev-tier2-blue-ws
       namespace: tsb-gitops
       annotations:
         tsb.tetrate.io/organization: tetrate
@@ -127,19 +127,43 @@ items:
       namespaceSelector:
         names:
           - "ngcom-preprod01-tier2-blue/app-gateways-global-dev"
+  - apiVersion: tsb.tetrate.io/v2
+    kind: Workspace
+    metadata:
+      name: app-gateways-global-dev-tier2-green-ws
+      namespace: tsb-gitops
+      annotations:
+        tsb.tetrate.io/organization: tetrate
+        tsb.tetrate.io/tenant: global-dev
+    spec:
+      namespaceSelector:
+        names:
           - "ngcom-preprod01-tier2-green/app-gateways-global-dev"
   - apiVersion: gateway.tsb.tetrate.io/v2
     kind: Group
     metadata:
-      name: app-gateways-global-dev-gg
+      name: app-gateways-global-dev-tier2-blue-gg
       namespace: tsb-gitops
       annotations:
         tsb.tetrate.io/organization: tetrate
         tsb.tetrate.io/tenant: global-dev
-        tsb.tetrate.io/workspace: app-gateways-global-dev-ws
+        tsb.tetrate.io/workspace: app-gateways-global-dev-tier2-blue-ws
     spec:
       namespaceSelector:
         names:
           - "ngcom-preprod01-tier2-blue/app-gateways-global-dev"
-          - "ngcom-preprod01-tier2-green/app-gateways-global-dev"
       configMode: BRIDGED
+  - apiVersion: gateway.tsb.tetrate.io/v2
+    kind: Group
+    metadata:
+      name: app-gateways-global-dev-tier2-green-gg
+      namespace: tsb-gitops
+      annotations:
+        tsb.tetrate.io/organization: tetrate
+        tsb.tetrate.io/tenant: global-dev
+        tsb.tetrate.io/workspace: app-gateways-global-dev-tier2-green-ws
+    spec:
+      namespaceSelector:
+        names:
+          - "ngcom-preprod01-tier2-green/app-gateways-global-dev"
+      configMode: BRIDGED      
