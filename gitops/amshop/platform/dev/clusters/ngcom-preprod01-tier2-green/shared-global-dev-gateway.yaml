@@ -26,8 +26,8 @@ items:
       annotations:
         tsb.tetrate.io/organization: tetrate
         tsb.tetrate.io/tenant: global-dev
-        tsb.tetrate.io/workspace: app-gateways-global-dev-ws
-        tsb.tetrate.io/gatewayGroup: app-gateways-global-dev-gg
+        tsb.tetrate.io/workspace: app-gateways-global-dev-tier2-greenws
+        tsb.tetrate.io/gatewayGroup: app-gateways-global-dev-tier2-green-gg
     spec:
       workloadSelector:
         namespace: app-gateways-global-dev
