@@ -2,7 +2,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: amshop-shared-gw-global-dev
+  name: ngcom-preprod01-tier2-green-shared-gw-global-dev
   namespace: argocd
 spec:
   destination:
