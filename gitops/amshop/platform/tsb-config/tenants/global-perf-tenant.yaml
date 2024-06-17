@@ -1,0 +1,14 @@
+---
+apiVersion: v1
+kind: List
+items:
+  - apiVersion: tsb.tetrate.io/v2
+    kind: Tenant
+    metadata:
+      name: global-perf
+      namespace: tsb-gitops
+      annotations:
+        tsb.tetrate.io/organization: tetrate
+    spec:
+      description: Global Products Perf
+      displayName: Global Products Perf

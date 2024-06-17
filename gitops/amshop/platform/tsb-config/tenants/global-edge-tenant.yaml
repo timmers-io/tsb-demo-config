@@ -1,0 +1,148 @@
+---
+apiVersion: v1
+kind: List
+items:
+  - apiVersion: tsb.tetrate.io/v2
+    kind: Tenant
+    metadata:
+      name: global-edge
+      namespace: tsb-gitops
+      annotations:
+        tsb.tetrate.io/organization: tetrate
+    spec:
+      description: Global Edge Gateways
+      displayName: Global Edge Gateways
+  - apiVersion: tsb.tetrate.io/v2
+    kind: Workspace
+    metadata:
+      name: edge-payment-global-dev-ws
+      namespace: tsb-gitops
+      annotations:
+        tsb.tetrate.io/organization: tetrate
+        tsb.tetrate.io/tenant: global-edge
+    spec:
+      namespaceSelector:
+        names:
+          - "ngcom-preprod01-tier1-blue/edge-payment-global-dev"
+  - apiVersion: gateway.tsb.tetrate.io/v2
+    kind: Group
+    metadata:
+      name: edge-payment-global-dev-gg
+      namespace: tsb-gitops
+      annotations:
+        tsb.tetrate.io/organization: tetrate
+        tsb.tetrate.io/tenant: global-edge
+        tsb.tetrate.io/workspace: edge-payment-global-dev-ws
+    spec:
+      namespaceSelector:
+        names:
+          - "ngcom-preprod01-tier1-blue/edge-payment-global-dev"
+      configMode: BRIDGED
+  - apiVersion: traffic.tsb.tetrate.io/v2
+    kind: Group
+    metadata:
+      name: edge-payment-global-dev-tg
+      namespace: tsb-gitops
+      annotations:
+        tsb.tetrate.io/organization: tetrate
+        tsb.tetrate.io/tenant: global-edge
+        tsb.tetrate.io/workspace: edge-payment-global-dev-ws
+    spec:
+      namespaceSelector:
+        names:
+          - "ngcom-preprod01-tier1-blue/edge-payment-global-dev"
+      configMode: BRIDGED
+  - apiVersion: security.tsb.tetrate.io/v2
+    kind: Group
+    metadata:
+      name: edge-payment-global-dev-sg
+      namespace: tsb-gitops
+      annotations:
+        tsb.tetrate.io/organization: tetrate
+        tsb.tetrate.io/tenant: global-edge
+        tsb.tetrate.io/workspace: edge-payment-global-dev-ws
+    spec:
+      namespaceSelector:
+        names:
+          - "ngcom-preprod01-tier1-blue/edge-payment-global-dev"
+      configMode: BRIDGED
+  - apiVersion: istiointernal.tsb.tetrate.io/v2
+    kind: Group
+    metadata:
+      name: edge-payment-global-dev-ig
+      namespace: tsb-gitops
+      annotations:
+        tsb.tetrate.io/organization: tetrate
+        tsb.tetrate.io/tenant: global-edge
+        tsb.tetrate.io/workspace: edge-payment-global-dev-ws
+    spec:
+      namespaceSelector:
+        names:
+          - "ngcom-preprod01-tier1-blue/edge-payment-global-dev"
+  - apiVersion: tsb.tetrate.io/v2
+    kind: Workspace
+    metadata:
+      name: edge-shared-global-dev-ws
+      namespace: tsb-gitops
+      annotations:
+        tsb.tetrate.io/organization: tetrate
+        tsb.tetrate.io/tenant: global-edge
+    spec:
+      namespaceSelector:
+        names:
+          - "ngcom-preprod01-tier1-blue/edge-shared-global-dev"
+  - apiVersion: gateway.tsb.tetrate.io/v2
+    kind: Group
+    metadata:
+      name: edge-shared-global-dev-gg
+      namespace: tsb-gitops
+      annotations:
+        tsb.tetrate.io/organization: tetrate
+        tsb.tetrate.io/tenant: global-edge
+        tsb.tetrate.io/workspace: edge-shared-global-dev-ws
+    spec:
+      namespaceSelector:
+        names:
+          - "ngcom-preprod01-tier1-blue/edge-shared-global-dev"
+      configMode: BRIDGED
+  - apiVersion: traffic.tsb.tetrate.io/v2
+    kind: Group
+    metadata:
+      name: edge-shared-global-dev-tg
+      namespace: tsb-gitops
+      annotations:
+        tsb.tetrate.io/organization: tetrate
+        tsb.tetrate.io/tenant: global-edge
+        tsb.tetrate.io/workspace: edge-shared-global-dev-ws
+    spec:
+      namespaceSelector:
+        names:
+          - "ngcom-preprod01-tier1-blue/edge-shared-global-dev"
+      configMode: BRIDGED
+  - apiVersion: security.tsb.tetrate.io/v2
+    kind: Group
+    metadata:
+      name: edge-shared-global-dev-sg
+      namespace: tsb-gitops
+      annotations:
+        tsb.tetrate.io/organization: tetrate
+        tsb.tetrate.io/tenant: global-edge
+        tsb.tetrate.io/workspace: edge-shared-global-dev-ws
+    spec:
+      namespaceSelector:
+        names:
+          - "ngcom-preprod01-tier1-blue/edge-shared-global-dev"
+      configMode: BRIDGED
+  - apiVersion: istiointernal.tsb.tetrate.io/v2
+    kind: Group
+    metadata:
+      name: edge-shared-global-dev-ig
+      namespace: tsb-gitops
+      annotations:
+        tsb.tetrate.io/organization: tetrate
+        tsb.tetrate.io/tenant: global-edge
+        tsb.tetrate.io/workspace: edge-shared-global-dev-ws
+    spec:
+      namespaceSelector:
+        names:
+          - "ngcom-preprod01-tier1-blue/edge-shared-global-dev"          
