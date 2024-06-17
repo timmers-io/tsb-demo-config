@@ -21,7 +21,7 @@ items:
   - apiVersion: gateway.tsb.tetrate.io/v2
     kind: Gateway
     metadata:
-      name: app-shared-gw
+      name: app-shared-gw-tier2-green
       namespace: app-gateways-global-dev
       annotations:
         tsb.tetrate.io/organization: tetrate
