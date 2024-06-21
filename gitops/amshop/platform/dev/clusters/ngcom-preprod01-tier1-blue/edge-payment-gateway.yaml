@@ -1,0 +1,20 @@
+---
+apiVersion: v1
+kind: List
+items:
+  - apiVersion: v1
+    kind: Namespace
+    metadata:
+      labels:
+        istio-injection: enabled
+      name: edge-payment-global-dev
+  - apiVersion: install.tetrate.io/v1alpha1
+    kind: Gateway
+    metadata:
+      name: edge-payment-gw
+      namespace: edge-payment-global-dev
+    spec:
+      type: UNIFIED
+      kubeSpec:
+        service:
+          type: LoadBalancer

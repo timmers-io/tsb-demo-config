@@ -1,0 +1,20 @@
+---
+apiVersion: v1
+kind: List
+items:
+  - apiVersion: v1
+    kind: Namespace
+    metadata:
+      labels:
+        istio-injection: enabled
+      name: edge-shared-global-dev
+  - apiVersion: install.tetrate.io/v1alpha1
+    kind: Gateway
+    metadata:
+      name: edge-shared-gw
+      namespace: edge-shared-global-dev
+    spec:
+      type: UNIFIED
+      kubeSpec:
+        service:
+          type: LoadBalancer
