@@ -75,9 +75,9 @@ items:
                   clusterDestination:
                     clusters:
                       - name: ngcom-preprod01-tier2-blue
-                        weight: 80
+                        weight: 60
                       - name: ngcom-preprod01-tier2-green
-                        weight: 20
+                        weight: 40
                 modify:
                   rewrite:
                     authority: 'product-global-dev.amcom-corp-preprod.amshop.internal'
