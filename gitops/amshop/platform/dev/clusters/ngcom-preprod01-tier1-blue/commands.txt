@@ -1,0 +1,38 @@
+
+
+internal.compaymentas.tetrate.io
+
+curl -k -vvv -HHost:details.tetrate.io --resolve "details.tetrate.io:443:$INGRESS_HOST" "http://details.tetrate.io:443/details/0"
+
+
+export INGRESS_HOST_IP=48.216.144.197
+export INGRESS_HOST_NAME=payment.ngcom.dev.amshop.com
+
+
+echo curl -k -vvv -HHost:$INGRESS_HOST_NAME --resolve "$INGRESS_HOST_NAME:80:$INGRESS_HOST_IP" "http://${INGRESS_HOST_NAME}:80/"
+
+curl -k -vvv -HHost:$INGRESS_HOST_NAME -H "X-B3-Sampled: 1" \
+  --resolve "$INGRESS_HOST_NAME:80:$INGRESS_HOST_IP" \
+  "http://${INGRESS_HOST_NAME}:80/"
+
+curl -k -vvv -HHost:$INGRESS_HOST_NAME -H "X-B3-Sampled: 1" \
+  --resolve "$INGRESS_HOST_NAME:80:$INGRESS_HOST_IP" \
+  "http://${INGRESS_HOST_NAME}:80/proxy/compaymentbs/proxy/compaymentds"
+
+
+export INGRESS_HOST_IP=48.216.144.197
+export INGRESS_HOST_NAME=payment.ngcom.dev.amshop.com
+
+echo curl -k -vvv -HHost:$INGRESS_HOST_NAME -H "X-B3-Sampled: 1" \
+  --resolve "$INGRESS_HOST_NAME:80:$INGRESS_HOST_IP" \
+  "http://${INGRESS_HOST_NAME}:80/proxy/compaymentbs/proxy/compaymentds"
+
+
+export INGRESS_HOST_IP=48.216.196.66
+export INGRESS_HOST_NAME=shared.ngcom.dev.amshop.com
+
+curl -k -vvv -HHost:$INGRESS_HOST_NAME -H "X-B3-Sampled: 1" \
+  --resolve "$INGRESS_HOST_NAME:80:$INGRESS_HOST_IP" \
+  "http://${INGRESS_HOST_NAME}:80/comcartas"
+
+
