@@ -138,7 +138,7 @@ items:
     spec:
       namespaceSelector:
         names:
-          - "ngcom-preprod01-tier2-green/app-gateways-global-dev"
+          - "ngcom-preprod01-tier2-green/app-gateways-global-dev-green"
   - apiVersion: gateway.tsb.tetrate.io/v2
     kind: Group
     metadata:
@@ -165,5 +165,5 @@ items:
     spec:
       namespaceSelector:
         names:
-          - "ngcom-preprod01-tier2-green/app-gateways-global-dev"
+          - "ngcom-preprod01-tier2-green/app-gateways-global-dev-green"
       configMode: BRIDGED      
