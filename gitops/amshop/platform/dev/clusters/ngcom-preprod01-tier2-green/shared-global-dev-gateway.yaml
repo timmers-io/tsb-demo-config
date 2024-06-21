@@ -7,12 +7,12 @@ items:
     metadata:
       labels:
         istio-injection: enabled
-      name: app-gateways-global-dev
+      name: app-gateways-global-dev-green
   - apiVersion: install.tetrate.io/v1alpha1
     kind: Gateway
     metadata:
       name: app-shared-gw-tier2-green
-      namespace: app-gateways-global-dev
+      namespace: app-gateways-global-dev-green
     spec:
       type: UNIFIED
       kubeSpec:
@@ -22,7 +22,7 @@ items:
     kind: Gateway
     metadata:
       name: app-shared-gw-tier2-green
-      namespace: app-gateways-global-dev
+      namespace: app-gateways-global-dev-green
       annotations:
         tsb.tetrate.io/organization: tetrate
         tsb.tetrate.io/tenant: global-dev
