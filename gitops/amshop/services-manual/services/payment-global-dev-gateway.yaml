@@ -1,0 +1,39 @@
+---
+apiVersion: v1
+kind: List
+items:
+  - apiVersion: install.tetrate.io/v1alpha1
+    kind: Gateway
+    metadata:
+      name: app-payment-gw
+      namespace: payment-global-dev
+    spec:
+      type: UNIFIED
+      kubeSpec:
+        service:
+          type: LoadBalancer
+  - apiVersion: gateway.tsb.tetrate.io/v2
+    kind: Gateway
+    metadata:
+      name: app-payment-gw
+      namespace: payment-global-dev
+      annotations:
+        tsb.tetrate.io/organization: tetrate
+        tsb.tetrate.io/tenant: global-dev
+        tsb.tetrate.io/workspace: payment-global-dev-ws
+        tsb.tetrate.io/gatewayGroup: payment-global-dev-gg
+    spec:
+      workloadSelector:
+        namespace: payment-global-dev
+        labels:
+          app: app-payment-gw
+      http:
+        - name: payment-global-dev
+          port: 80
+          hostname: "payment-global-dev.amcom-corp-preprod.amshop.internal"
+          routing:
+            rules:
+              - route:
+                  serviceDestination:
+                    host: "payment-global-dev/compaymentas.payment-global-dev.svc.cluster.local"
+                    port: 80

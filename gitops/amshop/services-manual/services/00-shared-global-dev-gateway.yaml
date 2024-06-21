@@ -1,0 +1,57 @@
+---
+apiVersion: v1
+kind: List
+items:
+  - apiVersion: install.tetrate.io/v1alpha1
+    kind: Gateway
+    metadata:
+      name: app-shared-gw-tier2-blue
+      namespace: app-gateways-global-dev
+    spec:
+      type: UNIFIED
+      kubeSpec:
+        service:
+          type: LoadBalancer
+  - apiVersion: gateway.tsb.tetrate.io/v2
+    kind: Gateway
+    metadata:
+      name: app-shared-gw-tier2-blue
+      namespace: app-gateways-global-dev
+      annotations:
+        tsb.tetrate.io/organization: tetrate
+        tsb.tetrate.io/tenant: global-dev
+        tsb.tetrate.io/workspace: app-gateways-global-dev-tier2-blue-ws
+        tsb.tetrate.io/gatewayGroup: app-gateways-global-dev-tier2-blue-gg
+    spec:
+      workloadSelector:
+        namespace: app-gateways-global-dev
+        labels:
+          app: app-shared-gw-tier2-blue
+      http:
+        - name: amshop-global-dev
+          port: 80
+          hostname: "amshop-global-dev.amcom-corp-preprod.amshop.internal"
+          routing:
+            rules:
+              - route:
+                  serviceDestination:
+                    host: "amshop-global-dev/comamshopas.amshop-global-dev.svc.cluster.local"
+                    port: 80
+        - name: cart-global-dev
+          port: 80
+          hostname: "cart-global-dev.amcom-corp-preprod.amshop.internal"
+          routing:
+            rules:
+              - route:
+                  serviceDestination:
+                    host: "cart-global-dev/comcartas.cart-global-dev.svc.cluster.local"
+                    port: 80
+        - name: product-global-dev
+          port: 80
+          hostname: "product-global-dev.amcom-corp-preprod.amshop.internal"
+          routing:
+            rules:
+              - route:
+                  serviceDestination:
+                    host: "product-global-dev/comproductas.product-global-dev.svc.cluster.local"
+                    port: 80

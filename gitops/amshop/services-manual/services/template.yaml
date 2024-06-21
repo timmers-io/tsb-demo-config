@@ -1,0 +1,71 @@
+---
+apiVersion: v1
+kind: List
+items:
+  - apiVersion: v1
+    kind: Service
+    metadata:
+      name: ${SERVICE_NAME}
+      namespace: ${NAMESPACE}
+      labels:
+        app: ${SERVICE_NAME}
+        service: ${SERVICE_NAME}
+    spec:
+      ports:
+        - port: 80
+          targetPort: 8000
+          name: http
+        - port: 3000
+          targetPort: 3000
+          name: tcp
+      selector:
+        app: ${SERVICE_NAME}
+  - apiVersion: v1
+    kind: ServiceAccount
+    metadata:
+      name: sa-${SERVICE_NAME}
+      namespace: ${NAMESPACE}
+      labels:
+        app: ${SERVICE_NAME}
+  - apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      name: ${SERVICE_NAME}-v1
+      namespace: ${NAMESPACE}
+      labels:
+        app: ${SERVICE_NAME}
+        version: v1
+    spec:
+      selector:
+        matchLabels:
+          app: ${SERVICE_NAME}
+          version: v1
+      template:
+        metadata:
+          labels:
+            app: ${SERVICE_NAME}
+            version: v1
+        spec:
+          serviceAccountName: sa-${SERVICE_NAME}
+          containers:
+            - name: obs-tester
+              image: gcr.io/timmers-images/obs-tester-server:v2.0
+              imagePullPolicy: Always
+              args:
+                - '--log-output-level=all:debug'
+                - '--http-listen-address=:8000' # address the http server in the container listens on
+                - '--tcp-listen-address=:3000' # address the tcp server in the container listens on
+                - '--ep-duration=0' # the default latency used for handling requests to / (echo handler)
+                - '--ep-errors=0' # the default percentage of errors injected when handling echo requests
+                - '--ep-headers=0' # the default percentage of double headers injected when handling echo requests
+                - '--zipkin-reporter-endpoint=http://zipkin.istio-system.svc.cluster.local:9411/api/v2/spans'
+                - '--zipkin-sample-rate=1.0' # When we originate client request, this is the sample rate we use.
+                - '--zipkin-singlehost-spans' # Envoy does not work well with Zipkin's default shared spans
+              env:
+                - name: SVCNAME
+                  value: ${SERVICE_NAME}
+              ports:
+                - name: http
+                  containerPort: 8000
+                - name: tcp
+                  containerPort: 3000
