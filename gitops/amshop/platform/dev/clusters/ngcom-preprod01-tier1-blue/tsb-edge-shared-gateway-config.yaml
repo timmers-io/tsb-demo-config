@@ -1,0 +1,84 @@
+---
+apiVersion: v1
+kind: List
+items:
+  - apiVersion: gateway.tsb.tetrate.io/v2
+    kind: Gateway
+    metadata:
+      name: edge-shared-gw
+      namespace: tsb-gitops
+      annotations:
+        tsb.tetrate.io/organization: tetrate
+        tsb.tetrate.io/tenant: global-edge
+        tsb.tetrate.io/workspace: edge-shared-global-dev-ws
+        tsb.tetrate.io/gatewayGroup: edge-shared-global-dev-gg
+    spec:
+      workloadSelector:
+        namespace: edge-shared-global-dev
+        labels:
+          app: edge-shared-gw
+      http:
+        - hostname: shared.ngcom.dev.amshop.com
+          name: shared-global-dev
+          port: 80
+          routing:
+            rules:
+              - match:
+                  - uri:
+                      prefix: /comamshopas/
+                  - uri:
+                      exact: /comamshopas
+                  - uri:
+                      prefix: /api/comamshopas
+                route:
+                  clusterDestination:
+                    clusters:
+                      - name: ngcom-preprod01-tier2-blue
+                        weight: 100
+                      - name: ngcom-preprod01-tier2-green
+                        weight: 0
+                modify:
+                  headers:
+                    request:
+                      add:
+                        X-amshop-ContextPath: default
+                        X-Source-Network: private
+                  rewrite:
+                    authority: 'amshop-global-dev.amcom-corp-preprod.amshop.internal'
+                    uri: "/"
+              - match:
+                  - uri:
+                      prefix: /comcartas/
+                  - uri:
+                      exact: /comcartas
+                  - uri:
+                      prefix: /api/comcartas
+                route:
+                  clusterDestination:
+                    clusters:
+                      - name: ngcom-preprod01-tier2-blue
+                        weight: 100
+                      - name: ngcom-preprod01-tier2-green
+                        weight: 0
+                modify:
+                  rewrite:
+                    authority: 'cart-global-dev.amcom-corp-preprod.amshop.internal'
+                    uri: "/"
+              - match:
+                  - uri:
+                      prefix: /comproductas/
+                  - uri:
+                      exact: /comproductas
+                  - uri:
+                      prefix: /api/comproductas
+                route:
+                  clusterDestination:
+                    clusters:
+                      - name: ngcom-preprod01-tier2-blue
+                        weight: 80
+                      - name: ngcom-preprod01-tier2-green
+                        weight: 20
+                modify:
+                  rewrite:
+                    authority: 'product-global-dev.amcom-corp-preprod.amshop.internal'
+                    uri: "/"

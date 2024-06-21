@@ -1,0 +1,33 @@
+---
+apiVersion: v1
+kind: List
+items:
+  - apiVersion: gateway.tsb.tetrate.io/v2
+    kind: Gateway
+    metadata:
+      name: edge-payment-gw
+      namespace: tsb-gitops
+      annotations:
+        tsb.tetrate.io/organization: tetrate
+        tsb.tetrate.io/tenant: global-edge
+        tsb.tetrate.io/workspace: edge-payment-global-dev-ws
+        tsb.tetrate.io/gatewayGroup: edge-payment-global-dev-gg
+    spec:
+      workloadSelector:
+        namespace: edge-payment-global-dev
+        labels:
+          app: edge-payment-gw
+      http:
+        - hostname: payment.ngcom.dev.amshop.com
+          name: payment-global-dev
+          port: 80
+          routing:
+            rules:
+              - route:
+                  clusterDestination:
+                    clusters:
+                      - name: ngcom-preprod01-tier2-blue
+                        weight: 100
+                modify:
+                  rewrite:
+                    authority: 'payment-global-dev.amcom-corp-preprod.amshop.internal'
