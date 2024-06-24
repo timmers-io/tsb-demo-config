@@ -131,7 +131,6 @@ items:
     kind: Workspace
     metadata:
       name: app-gateways-global-dev-tier2-green-ws
-      description: global dev tier2 green workspace
       namespace: tsb-gitops
       annotations:
         tsb.tetrate.io/organization: tetrate
