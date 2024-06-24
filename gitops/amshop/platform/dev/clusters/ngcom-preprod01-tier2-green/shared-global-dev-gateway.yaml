@@ -30,7 +30,7 @@ items:
         tsb.tetrate.io/gatewayGroup: app-gateways-global-dev-tier2-green-gg
     spec:
       workloadSelector:
-        namespace: app-gateways-global-dev
+        namespace: app-gateways-global-dev-green
         labels:
           app: app-shared-gw-tier2-green
       http:
