@@ -34,6 +34,24 @@ items:
         labels:
           app: app-shared-gw-tier2-blue
       http:
+        - name: amshop-global-dev
+          port: 80
+          hostname: "amshop-global-dev.amcom-corp-preprod.amshop.internal"
+          routing:
+            rules:
+              - route:
+                  serviceDestination:
+                    host: "amshop-global-dev/comamshopas.amshop-global-dev.svc.cluster.local"
+                    port: 80
+        - name: cart-global-dev
+          port: 80
+          hostname: "cart-global-dev.amcom-corp-preprod.amshop.internal"
+          routing:
+            rules:
+              - route:
+                  serviceDestination:
+                    host: "cart-global-dev/comcartas.cart-global-dev.svc.cluster.local"
+                    port: 80
         - name: product-global-dev
           port: 80
           hostname: "product-global-dev.amcom-corp-preprod.amshop.internal"
