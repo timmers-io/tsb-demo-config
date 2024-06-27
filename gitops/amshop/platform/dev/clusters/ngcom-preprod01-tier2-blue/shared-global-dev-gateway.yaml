@@ -1,0 +1,45 @@
+---
+apiVersion: v1
+kind: List
+items:
+  - apiVersion: v1
+    kind: Namespace
+    metadata:
+      labels:
+        istio-injection: enabled
+      name: app-gateways-global-dev-blue
+  - apiVersion: install.tetrate.io/v1alpha1
+    kind: Gateway
+    metadata:
+      name: app-shared-gw-tier2-blue
+      namespace: app-gateways-global-dev-blue
+    spec:
+      type: UNIFIED
+      kubeSpec:
+        service:
+          type: LoadBalancer
+  - apiVersion: gateway.tsb.tetrate.io/v2
+    kind: Gateway
+    metadata:
+      name: app-shared-gw-tier2-blue
+      namespace: app-gateways-global-dev-blue
+      annotations:
+        tsb.tetrate.io/organization: tetrate
+        tsb.tetrate.io/tenant: global-dev
+        tsb.tetrate.io/workspace: app-gateways-global-dev-tier2-blue-ws
+        tsb.tetrate.io/gatewayGroup: app-gateways-global-dev-tier2-blue-gg
+    spec:
+      workloadSelector:
+        namespace: app-gateways-global-dev-blue
+        labels:
+          app: app-shared-gw-tier2-blue
+      http:
+        - name: product-global-dev
+          port: 80
+          hostname: "product-global-dev.amcom-corp-preprod.amshop.internal"
+          routing:
+            rules:
+              - route:
+                  serviceDestination:
+                    host: "product-global-dev/comproductas.product-global-dev.svc.cluster.local"
+                    port: 80
