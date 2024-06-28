@@ -2,7 +2,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: ngcom-preprod01-tier2-blue-argocd-product-global-dev
+  name: preprod01-tier2-blue-amshop-global-dev
   namespace: argocd
 spec:
   destination:
@@ -12,7 +12,7 @@ spec:
   source:
     directory:
       recurse: true
-    path: gitops/amshop/applications/dev/clusters/ngcom-preprod01-tier2-blue/product
+    path: gitops/amshop/applications/dev/clusters/ngcom-preprod01-tier2-blue/amshop
     repoURL: https://github.com/timmers-io/tsb-demo-config.git
     targetRevision: main
   syncPolicy:
