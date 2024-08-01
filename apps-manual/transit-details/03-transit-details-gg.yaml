@@ -1,0 +1,15 @@
+---
+apiVersion: gateway.tsb.tetrate.io/v2
+kind: Group
+metadata:
+  organization: tetrate
+  tenant: transit
+  workspace: transit-gateway-ws
+  name: transit-details-gg
+spec:
+  description: Transit Details Gateway Group
+  displayName: Transit Details Gateway Group
+  namespaceSelector:
+    names:
+    - 'azure-eastus-blue/transit-details'
+    - 'azure-centralus-blue/transit-details'

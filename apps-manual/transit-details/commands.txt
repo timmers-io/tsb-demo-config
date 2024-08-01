@@ -1,0 +1,53 @@
+#
+#
+#
+
+#
+# Install the details service into the two workload clusters
+#
+export KUBECONFIG=
+
+k create ns transit-details
+
+k label ns transit-details istio-injection=enabled --overwrite=true
+
+k apply -f details-only.yaml -n transit-details
+
+k apply -f 00-gateway-details.yaml
+
+#
+# configure Edge gateway
+#
+export KUBECONFIG=
+
+k create ns transit-edge
+
+k apply -f 00-gateway-edge.yaml
+
+
+
+tctl apply -f 01-tenant-transit.yaml
+
+tctl apply -f 02-workspace-transit-ws.yaml
+
+tctl apply -f 03-transit-details-gg.yaml
+
+# configure application gateway
+
+tctl apply -f 04-gateway-details-ingress-config.yaml
+
+# configure Edge gateway
+
+tctl apply -f 05-transit-edge-gg.yaml
+
+tctl apply -f 06-transit-edge-gateway-config.yaml
+
+# to test an ingress 
+
+export INGRESS_HOST=
+
+curl -k -vvv -HHost:details.tetrate.io --resolve "details.tetrate.io:443:$INGRESS_HOST" "http://details.tetrate.io:443/details/0"
+
+# update the INGRESS_HOST then apply
+
+k apply -f trafficgen.yaml

@@ -1,0 +1,25 @@
+---
+apiVersion: gateway.tsb.tetrate.io/v2
+kind: Gateway
+metadata:
+  organization: tetrate
+  tenant: transit
+  workspace: transit-gateway-ws
+  group: transit-details-gg
+  name: details-gateway
+spec:
+  workloadSelector:
+    namespace: transit-details
+    labels:
+      app: tsb-gw-transit-details
+  http:
+    - name: details-gateway
+      port: 443
+      hostname: details.tetrate.io
+      routing:
+        rules:
+          - route:
+              serviceDestination:          
+                host: "transit-details/details.transit-details.svc.cluster.local"
+                port: 9080
+---

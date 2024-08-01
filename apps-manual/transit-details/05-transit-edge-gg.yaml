@@ -1,0 +1,13 @@
+apiVersion: gateway.tsb.tetrate.io/v2
+kind: Group
+metadata:
+  organization: tetrate
+  tenant: transit
+  workspace: transit-gateway-ws
+  name: transit-edge-gg
+spec:
+  description: Transit Edge Gateway Group
+  displayName: Transit Edge Gateway Group
+  namespaceSelector:
+    names:
+    - azure-eastus-edge/transit-edge

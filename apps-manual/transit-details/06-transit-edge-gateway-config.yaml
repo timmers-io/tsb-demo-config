@@ -1,0 +1,27 @@
+---
+apiVersion: gateway.tsb.tetrate.io/v2
+kind: Gateway
+metadata:
+  organization: tetrate
+  tenant: transit
+  workspace: transit-gateway-ws
+  group: transit-edge-gg
+  name: transit-gateway
+spec:
+  workloadSelector:
+    namespace: transit-edge
+    labels:
+      app: tsb-gw-transit-edge
+  http:
+    - hostname: details.tetrate.io
+      name: details
+      port: 443
+      routing:
+        rules:
+          - route:
+              clusterDestination:
+                clusters:
+                  - name: azure-eastus-blue
+                    weight: 50
+                  - name: azure-centralus-blue
+                    weight: 50

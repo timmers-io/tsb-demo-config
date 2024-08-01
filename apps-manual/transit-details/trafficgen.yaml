@@ -1,0 +1,36 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: trafficgen
+  labels:
+    istio-injection: enabled
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: trafficgenerator
+  namespace: trafficgen
+  labels:
+    app: trafficgenerator
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: trafficgenerator
+  template:
+    metadata:
+      labels:
+        app: trafficgenerator
+    spec:
+      containers:
+        - name: trafficgenerator
+          image: appropriate/curl
+          args:
+            - /bin/sh
+            - -c
+            - |
+              export INGRESS_HOST=51.8.254.65
+              while :; do
+                curl -k -vvv -HHost:details.tetrate.io -H "X-B3-Sampled: 1" --resolve "details.tetrate.io:443:$INGRESS_HOST" "http://details.tetrate.io:443/details/0"
+                sleep 6
+              done

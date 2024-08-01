@@ -1,0 +1,10 @@
+ apiVersion: install.tetrate.io/v1alpha1
+ kind: Gateway
+ metadata:
+   name: tsb-gw-transit-edge
+   namespace: transit-edge
+spec:
+   type: UNIFIED
+   kubeSpec:
+     service:
+       type: LoadBalancer
