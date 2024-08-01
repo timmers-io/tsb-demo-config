@@ -1,0 +1,52 @@
+#
+
+#
+# deploy the bookinfo application into two regions
+#
+export KUBECONFIG=
+
+kubectl create namespace bookinfo
+kubectl label namespace bookinfo istio-injection=enabled
+
+kubectl apply -n bookinfo -f https://raw.githubusercontent.com/istio/istio/master/samples/bookinfo/platform/kube/bookinfo.yaml
+
+#
+# apply TSB configurations
+#
+tctl apply -f 01-tenant-tetrate.yaml
+tctl apply -f 02-bookinfo-ws.yaml
+
+
+kubectl create namespace sleep
+kubectl label namespace sleep istio-injection=enabled
+kubectl apply -n sleep -f https://raw.githubusercontent.com/istio/istio/master/samples/sleep/sleep.yaml
+
+
+kubectl exec deployment/sleep -n sleep -c sleep -- curl -s http://productpage.bookinfo:9080/productpage | grep -i details -A 8
+
+# force trace
+kubectl exec deployment/sleep -n sleep -c sleep -- curl -s http://productpage.bookinfo:9080/productpage -HX-B3-Sampled:1 | grep -i details -A 8
+
+kubectl scale deployment details-v1 -n bookinfo --replicas=0
+
+kubectl scale deployment details-v1 -n bookinfo --replicas=1
+
+#
+# setup eastwest gateway
+#
+kubectl create ns eastwest
+kubectl apply -f 03-eastwest-gateway.yaml
+
+tctl apply -f 04-bookinfo-ws-setting.yaml
+
+while true; do kubectl exec deployment/sleep -n sleep -c sleep -- curl -s http://productpage.bookinfo:9080/productpage; sleep 10; done
+
+# force trace
+while true; do kubectl exec deployment/sleep -n sleep -c sleep -- curl -s http://productpage.bookinfo:9080/productpage -HX-B3-Sampled:1; sleep 10; done
+
+k apply -f trafficgen.yaml
+
+
+
+
+

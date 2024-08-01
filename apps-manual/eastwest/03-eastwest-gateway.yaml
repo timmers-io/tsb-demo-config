@@ -1,0 +1,10 @@
+apiVersion: install.tetrate.io/v1alpha1
+kind: Gateway
+metadata:
+  name: eastwest-gateway
+  namespace: bookinfo
+spec:
+  type: EASTWEST
+  kubeSpec:
+    service:
+      type: LoadBalancer
