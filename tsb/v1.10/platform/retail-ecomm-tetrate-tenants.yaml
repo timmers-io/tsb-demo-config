@@ -1,0 +1,87 @@
+---
+apiVersion: v1
+kind: List
+items:
+  - apiVersion: tsb.tetrate.io/v2
+    kind: Tenant
+    metadata:
+      name: retail-ecomm-non-prod
+      annotations:
+        tsb.tetrate.io/organization: tetrate
+    spec:
+      description: Retail Ecomm Non-Prod
+      displayName: Retail Ecomm Non-Prod
+  - apiVersion: tsb.tetrate.io/v2
+    kind: Workspace
+    metadata:
+      name: retail-dev
+      annotations:
+        tsb.tetrate.io/organization: tetrate
+        tsb.tetrate.io/tenant: retail-ecomm-non-prod
+    spec:
+      description: Retail Dev
+      displayName: Retail Dev
+      namespaceSelector:
+        names:
+          - "*/retail-dev"
+  - apiVersion: tsb.tetrate.io/v2
+    kind: Workspace
+    metadata:
+      name: retail-test
+      annotations:
+        tsb.tetrate.io/organization: tetrate
+        tsb.tetrate.io/tenant: retail-ecomm-non-prod
+    spec:
+      description: Retail Test
+      displayName: Retail Test
+      namespaceSelector:
+        names:
+          - "*/retail-test"
+  - apiVersion: tsb.tetrate.io/v2
+    kind: Workspace
+    metadata:
+      name: retail-stage
+      annotations:
+        tsb.tetrate.io/organization: tetrate
+        tsb.tetrate.io/tenant: retail-ecomm-non-prod
+    spec:
+      description: Retail Stage
+      displayName: Retail Stage
+      namespaceSelector:
+        names:
+          - "*/retail-stage"
+  - apiVersion: tsb.tetrate.io/v2
+    kind: Tenant
+    metadata:
+      name: retail-ecomm-prod
+      annotations:
+        tsb.tetrate.io/organization: tetrate
+    spec:
+      description: Retail Ecomm Prod
+      displayName: Retail Ecomm Prod
+  - apiVersion: tsb.tetrate.io/v2
+    kind: Workspace
+    metadata:
+      name: retail-prod
+      annotations:
+        tsb.tetrate.io/organization: tetrate
+        tsb.tetrate.io/tenant: retail-ecomm-prod
+    spec:
+      description: Retail Prod
+      displayName: Retail Prod
+      namespaceSelector:
+        names:
+          - "*/retail-prod"
+  - apiVersion: tsb.tetrate.io/v2
+    kind: Workspace
+    metadata:
+      name: retail-uat
+      annotations:
+        tsb.tetrate.io/organization: tetrate
+        tsb.tetrate.io/tenant: retail-ecomm-prod
+    spec:
+      description: Retail UAT
+      displayName: Retail UAT
+      namespaceSelector:
+        names:
+          - "*/retail-uat"
