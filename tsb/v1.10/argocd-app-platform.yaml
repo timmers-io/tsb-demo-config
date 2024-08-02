@@ -12,7 +12,7 @@ spec:
   source:
     directory:
       recurse: true
-    path: gitops/tsb/v1.10/platform
+    path: tsb/v1.10/platform
     repoURL: https://github.com/timmers-io/tsb-demo-config.git
     targetRevision: main
   syncPolicy:

@@ -10,7 +10,7 @@ items:
         tsb.tetrate.io/organization: tetrate
     spec:
       description: Fintech Debit Non-Prod
-      displayName: Fintech Debit Non-Prod
+      displayName: Fintech Debit Non-Prod Display Name
   - apiVersion: tsb.tetrate.io/v2
     kind: Workspace
     metadata:
