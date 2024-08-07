@@ -1,0 +1,13 @@
+data:
+  resource.exclusions: |
+    - apiGroups:
+      - xcp.tetrate.io
+      - install.xcp.tetrate.io
+      - gateway.xcp.tetrate.io
+      - traffic.xcp.tetrate.io
+      - security.xcp.tetrate.io
+      - istiointernal.xcp.tetrate.io
+      kinds:
+      - "*"
+      clusters:
+      - "*"
