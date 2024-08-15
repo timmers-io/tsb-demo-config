@@ -1,0 +1,29 @@
+#
+# Install obstest demo
+#
+export KUBECONFIG=
+
+k create ns obstest
+
+k label ns obstest istio-injection=enabled --overwrite=true
+
+tctl apply -f 01-tenant-workspace.yaml
+
+helm install frontend obs-svc -n obstest --set svcName=frontend --set svcVersion=v1
+helm install svca obs-svc -n obstest --set svcName=svca --set svcVersion=v1
+
+
+kubectl apply -n trafficgen -f https://raw.githubusercontent.com/istio/istio/master/samples/sleep/sleep.yaml
+
+kubectl exec deployment/sleep -n trafficgen -c sleep -- curl -s http://frontend.obstest
+
+kubectl exec deployment/sleep -n trafficgen -c sleep -- curl -s http://svcc.obstest/latency/200ms
+
+# trafficgen loop
+#
+              while :; do
+                curl -H "X-B3-Sampled: 1" -s http://frontend.obstest/proxy/svca/proxy/svcb/proxy/svcc
+                sleep 1
+                curl -H "X-B3-Sampled: 1" -s http://frontend.obstest/proxy/svcd/proxy/svc/proxy/https://httpbingo.org/get
+              done
+ 

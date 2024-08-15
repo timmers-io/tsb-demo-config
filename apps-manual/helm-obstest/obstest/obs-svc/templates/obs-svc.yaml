@@ -1,0 +1,86 @@
+{{- if not (lookup "v1" "ServiceAccount" .Release.Namespace .Values.svcName) }}
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  labels:
+    app: {{ .Values.svcName }}
+  name: {{ .Values.svcName }}
+{{- end}}
+---
+{{- if not (lookup "v1" "Service" .Release.Namespace .Values.svcName) }}
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: {{ .Values.svcName }}
+    service: {{ .Values.svcName }}
+  name: {{ .Values.svcName }}
+spec:
+  ports:
+  - name: http
+    port: 80
+    targetPort: 8000
+  - name: tcp
+    port: 3000
+    targetPort: 3000
+  selector:
+    app: {{ .Values.svcName }}
+{{- end}}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: {{ .Values.svcName }}
+    version: {{ .Values.svcVersion }}
+  name: {{ .Values.svcName }}-{{ .Values.svcVersion }}
+spec:
+  selector:
+    matchLabels:
+      app: {{ .Values.svcName }}
+      version: {{ .Values.svcVersion }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.svcName }}
+        version: {{ .Values.svcVersion }}
+    spec:
+      containers:
+      - args:
+        - --log-output-level=all:debug
+        - --http-listen-address=:8000
+        - --tcp-listen-address=:3000
+        - --ep-duration=0
+        - --ep-errors=0
+        - --ep-headers=0
+        - --zipkin-reporter-endpoint=http://zipkin.istio-system.svc.cluster.local:9411/api/v2/spans
+        - --zipkin-sample-rate=1.0
+        - --zipkin-singlehost-spans
+        env:
+        - name: SVCNAME
+          value: {{ .Values.svcName }}
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.name
+        - name: NAMESPACE
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+        - name: SIDECAR_STATUS
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.annotations['sidecar.istio.io/status']
+        image: gcr.io/timmers-images/obs-tester-server:v3.0
+#        image: gcr.io/abz-perm/obs-tester-server:v2.0
+        imagePullPolicy: Always
+        name: obs-tester
+        ports:
+        - containerPort: 8000
+          name: http
+        - containerPort: 3000
+          name: tcp
+      serviceAccountName: {{ .Values.svcName }}

@@ -1,0 +1,25 @@
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: ServiceEntry
+metadata:
+  name: httpbin-org
+  namespace: egress
+  annotations:
+    tsb.tetrate.io/organization: tetrate
+    tsb.tetrate.io/tenant: obstest
+    tsb.tetrate.io/workspace: obstest-ws
+    tsb.tetrate.io/istioInternalGroup: obstest-ig
+  labels:
+    istio.io/rev: tsb
+spec:
+  hosts:
+    - httpbin.org
+  exportTo:
+    - "." 
+  location: MESH_EXTERNAL
+  ports:
+    - number: 443
+      name: https
+      protocol: HTTPS
+  resolution: DNS
+  

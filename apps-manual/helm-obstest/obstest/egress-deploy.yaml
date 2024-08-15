@@ -1,0 +1,7 @@
+apiVersion: install.tetrate.io/v1alpha1
+kind: Gateway
+metadata:
+  name: egress-gateway
+  namespace: egress
+spec:
+  type: EGRESS

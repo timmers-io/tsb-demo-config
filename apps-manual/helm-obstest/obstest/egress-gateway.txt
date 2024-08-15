@@ -1,0 +1,84 @@
+
+
+cat <<EOF | kubectl apply -f -
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: egress
+  labels:
+    istio-injection: enabled
+---
+apiVersion: install.tetrate.io/v1alpha1
+kind: Gateway
+metadata:
+  name: egress-gateway
+  namespace: egress
+spec:
+  kubeSpec:
+    service:
+      annotations:
+        traffic.istio.io/nodeSelector: '{"beta.kubernetes.io/os": "linux"}'
+      type: NodePort
+EOF
+
+#
+#
+#
+
+
+cat <<EOF | tctl apply -f -
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: ServiceEntry
+metadata:
+  name: httpbingo-org
+  namespace: egress
+  annotations:
+    tsb.tetrate.io/organization: tetrate
+    tsb.tetrate.io/tenant: obstest
+    tsb.tetrate.io/workspace: obstest-ws
+    tsb.tetrate.io/istioInternalGroup: obstest-ig
+spec:
+  hosts:
+    - httpbingo.org
+  exportTo:
+    - "." 
+  location: MESH_EXTERNAL
+  ports:
+    - number: 443
+      name: https
+      protocol: HTTPS
+  resolution: DNS
+---
+apiVersion: gateway.tsb.tetrate.io/v2
+kind: Gateway
+metadata:
+  name: egress-gateway
+  organization: tetrate
+  tenant: obstest
+  workspace: obstest-ws
+  group: obstest-gg
+spec:
+  displayName: Egress Gateway
+  workloadSelector:
+    namespace: egress
+    labels:
+      app: egress-gateway
+  http:
+   - hostname: httpbingo.org
+     name: httpbingo
+     routing:
+      rules:
+        - modify:
+            rewrite:
+              authority: httpbingo.org
+          route:
+            serviceDestination:
+              host: egress/httpbingo.org
+              tls:
+                mode: SIMPLE
+                files:
+                  caCertificates: "/etc/ssl/certs/ca-certificates.crt"
+EOF
+

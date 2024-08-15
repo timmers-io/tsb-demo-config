@@ -1,0 +1,22 @@
+apiVersion: traffic.tsb.tetrate.io/v2
+kind: TrafficSetting
+metadata:
+  name: obstest-traffic-policy
+  displayName: obstest-traffic-policy
+  organization: tetrate
+  tenant: obstest
+  workspace: obstest-ws
+  group: obstest-tg
+spec:
+  displayName: obstest-traffic-policy
+  upstreamTrafficSettings:
+  - hosts:
+    - svcc.obstest.svc.cluster.local
+    settings:
+      resilience:
+        connectionPool:
+          http:
+            retries:
+              attempts: 3
+              perTryTimeout: 1s
+              retryOn: 5xx

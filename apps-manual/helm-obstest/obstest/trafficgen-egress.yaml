@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: traffic-egress
+  namespace: trafficgen
+  labels:
+    app: traffic-egress
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: traffic-egress
+  template:
+    metadata:
+      labels:
+        app: traffic-egress
+    spec:
+      containers:
+        - name: traffic-egress
+          image: appropriate/curl
+          args:
+            - /bin/sh
+            - -c
+            - |
+              while :; do
+                curl -H "X-B3-Sampled: 1" -s http://frontend.obstest/proxy/svcd/proxy/svce
+                sleep 1
+              done

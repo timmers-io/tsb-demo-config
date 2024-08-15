@@ -1,0 +1,16 @@
+apiVersion: traffic.tsb.tetrate.io/v2
+kind: TrafficSetting
+metadata:
+  displayName: retry-setting
+  group: obstest-tg
+  name: retry-setting
+  organization: tetrate
+  tenant: obstest
+  workspace: obstest-ws
+spec:
+  displayName: retry-setting
+  resilience:
+    httpRetries:
+      attempts: 3
+      perTryTimeout: 2s
+      retryOn: 5xx
